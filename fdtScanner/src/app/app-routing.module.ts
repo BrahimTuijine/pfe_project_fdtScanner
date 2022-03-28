@@ -1,3 +1,4 @@
+import { StatisticsComponent } from './routes/statistics/statistics.component';
 import { FdtPlacesComponent } from './routes/fdt-places/fdt-places.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AuthComponent } from './layouts/auth/auth.component';
@@ -6,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: AuthComponent,
   },
 
@@ -15,8 +16,17 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'fdtplaces',
+        pathMatch: 'full',
+      },
+      {
         path: 'fdtplaces',
         component: FdtPlacesComponent,
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent,
       },
     ],
   },

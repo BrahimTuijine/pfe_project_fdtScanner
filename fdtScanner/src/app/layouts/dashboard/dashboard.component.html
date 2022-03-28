@@ -1,15 +1,17 @@
 <nz-layout>
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-      <div class="logo"></div>
-      <ul nz-menu nzTheme="light" nzMode="inline">
-        <li nzTitle="Team" nzIcon="team" >
-          <ul>
-            <li nz-menu-item >Team 1</li>
-            <li nz-menu-item>Team 2</li>
-          </ul>
-        </li>
-      </ul>
-    </nz-sider>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/dashboard/fdtplaces" [nzSelected]="true">
+        <i nz-icon nzType="environment" nzTheme="outline">
+        </i> <span>Map</span>
+      </li>
+      <li nz-menu-item routerLink="/dashboard/statistics">
+        <i nz-icon nzType="line-chart" nzTheme="outline"></i>
+        <span>Statistics</span>
+      </li>
+    </ul>
+  </nz-sider>
   <nz-layout>
     <nz-header>
       <i
@@ -18,13 +20,19 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+      <div>
+        <i nz-icon nzType="bell" nzTheme="outline" class="notifIcon"></i>
+        <nz-avatar nzIcon="user" [nzSize]="30"></nz-avatar>
+      </div>
     </nz-header>
     <nz-content>
       <nz-breadcrumb>
-        <!-- <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item> -->
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content">Bill is a cat.</div>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
