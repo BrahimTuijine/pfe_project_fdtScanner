@@ -3,8 +3,7 @@
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/dashboard/fdtplaces" [nzSelected]="true">
-        <i nz-icon nzType="environment" nzTheme="outline">
-        </i> <span>Map</span>
+        <i nz-icon nzType="environment" nzTheme="outline"> </i> <span>Map</span>
       </li>
       <li nz-menu-item routerLink="/dashboard/statistics">
         <i nz-icon nzType="line-chart" nzTheme="outline"></i>
@@ -20,9 +19,56 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
-      <div>
-        <i nz-icon nzType="bell" nzTheme="outline" class="notifIcon"></i>
-        <nz-avatar nzIcon="user" [nzSize]="30"></nz-avatar>
+      <div class="notifIcon">
+        <a
+          nz-dropdown
+          nzTrigger="click"
+          [nzDropdownMenu]="menu"
+          nzPlacement="bottomRight"
+        >
+          <i nz-icon nzType="bell" nzTheme="outline"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu" >
+          <ul nz-menu class="menuH">
+            <li nz-menu-item >1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>2nd menu item</li>
+          </ul>
+        </nz-dropdown-menu>
       </div>
     </nz-header>
     <nz-content>
