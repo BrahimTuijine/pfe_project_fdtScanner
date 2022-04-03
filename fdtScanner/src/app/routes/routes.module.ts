@@ -23,7 +23,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
   imports: [
     CommonModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDyN-dKPTc1deKK_BEoFcyyui7O753Jo9E',
+      apiKey: 'AIzaSyAhQUcvRV1qqWlWSytbOVxfCbUMMdC3KhE',
     }),
     NzFormModule,
     NzButtonModule,

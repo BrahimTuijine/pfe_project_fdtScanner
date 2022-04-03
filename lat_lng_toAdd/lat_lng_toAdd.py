@@ -1,12 +1,33 @@
-from geopy.geocoders import Nominatim
+from selenium import webdriver
+from time import sleep
+import arabic_reshaper
+from bidi.algorithm import get_display
 
-# calling the nominatim tool
-geoLoc = Nominatim(user_agent="GetLoc")
+driver = webdriver.Chrome(executable_path="C:\webdrivers\chromedriver.exe")
 
-# passing the coordinates
-locname = geoLoc.reverse("37.169327 , 10.033846")
+driver.get("https://www.gps-coordinates.net/gps-coordinates-converter")
 
-# printing the address/location name
-print(locname.address)
+sleep(2)
 
-# https://www.gps-coordinates.net/gps-coordinates-converter
+latitudeInput = driver.find_element_by_xpath(
+    "//*[@id='latitude']").send_keys("37.169327")
+longitudeInput = driver.find_element_by_xpath(
+    "//*[@id='longitude']").send_keys("10.033846")
+
+sleep(2)
+
+getAddressBtn = driver.find_element_by_xpath(
+    "/html/body/div[2]/div[2]/div[2]/div[1]/form[2]/div[3]/div/button").click()
+
+addressInput = driver.find_element_by_xpath("//*[@id='address']")
+
+sleep(2)
+
+print(get_display(arabic_reshaper.reshape(addressInput.get_attribute('value'))))
+
+driver.close()
+
+# text = "ذهب الطالب الى المدرسة"
+# reshaped_text = arabic_reshaper.reshape(text)    # correct its shape
+# bidi_text = get_display(reshaped_text)
+# print(bidi_text)

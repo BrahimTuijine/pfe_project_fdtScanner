@@ -2,34 +2,42 @@ import { LoginService } from './../../services/auth/login.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  data?: Subscription;
-
+  respense = {};
   submit(): void {
     if (this.validateForm.valid) {
-      this.data = this.loginService
-        .login(this.validateForm.value)
-        .subscribe((data) => console.log(data));
+      this.loginService.login(this.validateForm.value).subscribe((data) => {
+        console.log(data);
+        
+      });
+      console.log(this.respense);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
+
+    // console.log(this.validateForm.valid);
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
-  ngOnDestroy(): void {
-    this.data?.unsubscribe();
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
+
+  gotoDashboard() {
+    this.router.navigate(['/dashboard']);
   }
 
   ngOnInit(): void {

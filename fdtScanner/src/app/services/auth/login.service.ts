@@ -9,9 +9,9 @@ export class LoginService {
 
   headers = { Accept: 'application/json' };
 
-  login = (body: any) => {
+  login(body: any) {
     return this.http.post('http://127.0.0.1:8000/api/login', body, {
       headers: this.headers,
     });
-  };
+  }
 }
