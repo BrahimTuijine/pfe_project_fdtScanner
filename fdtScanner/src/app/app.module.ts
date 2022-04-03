@@ -2,7 +2,6 @@ import { RoutesModule } from './routes/routes.module';
 import { LayoutsModule } from './layouts/layouts.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SafePipeModule } from 'safe-pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -27,7 +26,6 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     LayoutsModule,
     RoutesModule,
-    SafePipeModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

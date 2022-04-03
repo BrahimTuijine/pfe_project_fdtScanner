@@ -7,8 +7,5 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
+  ngOnInit(): void {}
 }
