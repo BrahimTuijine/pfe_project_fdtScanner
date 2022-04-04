@@ -4,13 +4,17 @@
   [zoom]="zoom"
   [disableDefaultUI]="false"
 >
-  <agm-marker 
-    *ngFor="let m of  markers; let i = index"
-    [latitude]="m.lat"
-    [longitude]="m.lng"
+  <agm-marker
+    *ngFor="let m of fdtlist | async"
+    [latitude]="m.fdtLat"
+    [longitude]="m.fdtLng"
   >
-  <agm-info-window >
-      <strong>{{m.name}}</strong>
-  </agm-info-window>
-</agm-marker>
+    <agm-info-window>
+      <strong>{{ m.fdtName }}</strong>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
+
+<div *ngFor="let oneFdt of fdtlist | async">
+  {{ oneFdt | json }}
+</div>

@@ -1,3 +1,7 @@
+import {
+  Fdtlist,
+  FdtListService,
+} from './../../services/getFdtList/fdt-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,31 +16,11 @@ export class FdtPlacesComponent implements OnInit {
   lat = 36.88244379050573;
   lng = 10.169747056472744;
 
-  // Markers
-  markers: marker[] = [
-    {
-      name: 'fdt number one',
-      lat: 36.821,
-      lng: 10.168,
-    },
-    {
-      name: 'fdt number two',
-      lat: 36.8221,
-      lng: 10.18304,
-    },
-    {
-      name: 'fdt number two',
-      lat: 36.8821,
-      lng: 10.16804,
-    },
-  ];
+  fdtlist: any;
 
-  constructor() {}
+  constructor(private fdtListService: FdtListService) {}
 
-  ngOnInit(): void {}
-}
-interface marker {
-  name: string;
-  lat: number;
-  lng: number;
+  ngOnInit(): void {
+    this.fdtlist = this.fdtListService.getAllFdt();
+  }
 }

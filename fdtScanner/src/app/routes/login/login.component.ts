@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,36 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  respense = {};
+
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private toast: NgToastService
+  ) {}
+
   submit(): void {
     if (this.validateForm.valid) {
-      this.loginService.login(this.validateForm.value).subscribe((data) => {
-        console.log(data);
-        
+      this.loginService.login(this.validateForm.value).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.toast.success({
+            detail: 'SUCCESS Message',
+            summary: 'Login Successfully',
+            duration: 5000,
+          });
+          // this.gotoDashboard()
+        },
+        error: (error) => {
+          console.log(error.error);
+          this.toast.error({
+            detail: 'ERROR Message',
+            summary: 'Login Failed, Try again later !!',
+            duration: 5000,
+          });
+        },
       });
-      console.log(this.respense);
+      // console.log(this.respense);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -26,16 +49,7 @@ export class LoginComponent implements OnInit {
         }
       });
     }
-
-    // console.log(this.validateForm.valid);
   }
-
-  constructor(
-    private fb: FormBuilder,
-    private loginService: LoginService,
-    private router: Router
-  ) {}
-
   gotoDashboard() {
     this.router.navigate(['/dashboard']);
   }

@@ -11,14 +11,12 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-
 @NgModule({
   declarations: [
     FdtPlacesComponent,
     StatisticsComponent,
     LowSignalNotificationComponent,
     LoginComponent,
-    
   ],
   imports: [
     CommonModule,
