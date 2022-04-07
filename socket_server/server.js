@@ -8,27 +8,21 @@ const io = require("socket.io")(http, {
   },
 });
 
-
-ids = []
-
-
+ids = {};
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
-  ids.push(socket.id)
-  console.log("this is my tab ids ");
+  ids[socket.handshake.headers.name] = socket.id
+  console.log("this is my object");
   console.log(ids);
+  
 
-
-  socket.on("hello" , (data) => {
-    console.log(data);
-    io.to(ids[0]).emit("fromAngular" , data)
+  socket.on("showAngularNotification", (data) => {
+    io.to(ids.angular).emit("showNotification")
   });
-
-
 });
+
+
 
 http.listen(4444, () => {
   console.log("Listening on port 4444");
 });
-
