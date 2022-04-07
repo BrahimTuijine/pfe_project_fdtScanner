@@ -24,16 +24,16 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.loginService.login(this.validateForm.value).subscribe({
         next: (data) => {
-          console.log(data);
+          // console.log(data);
+          localStorage.setItem('userData', JSON.stringify(data));
           this.toast.success({
             detail: 'SUCCESS Message',
             summary: 'Login Successfully',
             duration: 5000,
           });
-          // this.gotoDashboard()
+          this.gotoDashboard();
         },
         error: (error) => {
-          console.log(error.error);
           this.toast.error({
             detail: 'ERROR Message',
             summary: 'Login Failed, Try again later !!',
@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
           });
         },
       });
-      // console.log(this.respense);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {

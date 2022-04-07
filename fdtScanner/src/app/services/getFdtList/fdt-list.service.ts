@@ -22,9 +22,8 @@ export class FdtListService {
 export interface Fdtlist {
   id: number;
   fdtName: string;
-  placeLink: string;
   fdtLat: number;
   fdtLng: number;
-  created_at?: number;
-  updated_at?: number;
+  created_at?: Date;
+  updated_at?: Date;
 }

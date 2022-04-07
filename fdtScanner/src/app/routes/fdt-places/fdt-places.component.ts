@@ -1,8 +1,8 @@
 import {
-  Fdtlist,
   FdtListService,
 } from './../../services/getFdtList/fdt-list.service';
 import { Component, OnInit } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-fdt-places',
@@ -18,9 +18,14 @@ export class FdtPlacesComponent implements OnInit {
 
   fdtlist: any;
 
-  constructor(private fdtListService: FdtListService) {}
+
+
+  constructor(private fdtListService: FdtListService ) {}
 
   ngOnInit(): void {
     this.fdtlist = this.fdtListService.getAllFdt();
   }
+
+
 }
+

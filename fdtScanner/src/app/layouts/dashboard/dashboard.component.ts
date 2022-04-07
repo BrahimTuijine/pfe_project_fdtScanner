@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,17 @@ export class DashboardComponent implements OnInit {
   public isCollapsed: boolean = false;
   public dot = true;
 
-  constructor() {}
+  constructor(private socket: Socket , private toast: NgToastService) {
+    
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.socket.on('showNotification', () => {
+      this.toast.error({
+        detail: 'ERROR Message',
+        summary: 'there is a problem in python',
+        duration: 5000,
+      });
+    });
+  }
 }

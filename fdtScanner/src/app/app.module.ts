@@ -12,14 +12,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule } from 'ng-angular-popup';
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 registerLocaleData(en);
+const config: SocketIoConfig = {
+  url: 'http://localhost:4444',
+  options: {
+    extraHeaders: {
+      "name": "angular"
+    }
+  },
+};
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,9 +34,10 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     LayoutsModule,
     RoutesModule,
-    NgToastModule
+    NgToastModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
