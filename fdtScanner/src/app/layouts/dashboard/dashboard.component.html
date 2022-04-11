@@ -19,7 +19,7 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
-      <div class="notifIcon">
+      <div class="notifIcon" (click)="fetchNotification()">
         <a
           nz-dropdown
           nzTrigger="click"
@@ -29,16 +29,41 @@
           <i nz-icon nzType="bell" nzTheme="outline"></i>
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu class="menuH">
-            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
-            <li nz-menu-divider></li>
-            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
-            <li nz-menu-divider></li>
-            <li nz-menu-item>1st menu itemhhhhhhhhhhhhhhhhhhhhhhhhh</li>
+          <ul
+            nz-menu
+            nzSelectable
+            *ngIf="notification.length > 0; else nonotif"
+          >
+            <li *ngFor="let item of notification" class="notifComponent">
+              <i
+                nz-icon
+                nzType="warning"
+                nzTheme="twotone"
+                nzTwotoneColor="red"
+                style="font-size: 30px; margin-top: 7px ; padding-right: 15px;"
+              ></i>
+              <div>
+                <a routerLink="/dashboard/notification" class="notifElement">
+                  <div class="notifTitle">
+                    {{ item.fdtName }}
+                  </div>
+                  <div class="notifTime">
+                    {{ item.created_at }}
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li nz-menu-divider *ngIf="notification.length > 1"></li>
           </ul>
+          <ng-template #nonotif>
+            <ul nz-menu nzSelectable>
+              <li style="padding:10px"><nz-empty nzNotFoundContent="no notification"></nz-empty></li>
+            </ul>
+          </ng-template>
         </nz-dropdown-menu>
+
         <nz-badge [nzDot]="dot"></nz-badge>
-        <nz-avatar [nzSize]="32" nzIcon="user"></nz-avatar>  
+        <nz-avatar [nzSize]="32" nzIcon="user"></nz-avatar>
       </div>
     </nz-header>
     <nz-content>

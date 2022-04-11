@@ -13,6 +13,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 const ZORRO = [
   NzLayoutModule,
@@ -23,6 +25,8 @@ const ZORRO = [
   NzAvatarModule,
   NzBadgeModule,
   NzDropDownModule,
+  NzListModule,
+  NzEmptyModule,
 ];
 
 @NgModule({
