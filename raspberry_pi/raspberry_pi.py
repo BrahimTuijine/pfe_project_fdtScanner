@@ -1,5 +1,4 @@
 
-from ast import If
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.by import By
@@ -7,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
 import socketio
+import json
 
 
 def getDistinatonIframe(fdtPlace):
@@ -43,17 +43,17 @@ def getDistinatonIframe(fdtPlace):
     menuBtn = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[1]/button").click()
 
-    sleep(2)
+    sleep(4)
 
     mapBtn = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[25]/div/div[2]/ul/div[5]/li[1]/button").click()
 
-    sleep(2)
+    sleep(4)
 
     embedMap = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[2]/button[2]").click()
 
-    sleep(2)
+    sleep(4)
 
     myframe = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")
@@ -75,7 +75,6 @@ def myLocation():
 
     driver.find_element_by_xpath("/html/body/button").click()
 
-    # sleep(5)
     driver.implicitly_wait(10)
 
     lat = driver.find_element_by_xpath("/html/body/p[2]/p[1]").text
@@ -113,42 +112,53 @@ def latLngToAdd(latLngTab):
     return addressInput
 
 
-def registerInFdtList(fdtName, location):
+def registerInFdtList(fdtPlace, location):
     myData = {
-        "fdtName": fdtName,
+        "fdtName": fdtPlace,
         "fdtLat": location[0],
         "fdtLng": location[1]
     }
     x = requests.post("http://127.0.0.1:8000/api/fdtList", data=myData)
-    print(x.text)
+    return x.json()["id"]
 
 
-# myLatLng = myLocation()
-# location = myLatLng[0] + "," + myLatLng[1]
-# fdtAddresse = latLngToAdd(myLatLng)
-# iframeLink = getDistinatonIframe(location).split()[1][:-1].replace('src="', '')
+myLatLng = myLocation()
+fdtAddresse = latLngToAdd(myLatLng)
+location = myLatLng[0] + "," + myLatLng[1]
+iframeLink = getDistinatonIframe(location).split()[1][:-1].replace('src="', '')
+fdtId = registerInFdtList(fdtAddresse, myLatLng)
 
-# registerInFdtList(fdtAddresse , myLatLng)
 
 sio = socketio.Client()
 
-sio.connect('http://localhost:4444', headers={"name": "fdtAddresse"})
+sio.connect('http://localhost:4444',
+            headers={"name": str(fdtId)})
 
 myTab = [9, 8, 12, 7]
 
 i = 0
 
-while (i !=len(myTab)):
 
-    @sio.on('fromAngular')
-    def on_message(data):
-        print(data)
+@sio.on('getCurrentValue')
+def on_message():
+    print("hay wouslet")
+    sio.emit("segnalValue", {"value": myTab[3]})
 
-    
+
+while (i != len(myTab)):
+
     print(i)
     if(myTab[i] > 10):
         sio.emit('showAngularNotification')
-        print("event sended")
+
+        notificatonData = {
+            "fdtName": fdtAddresse,
+            "value": myTab[i],
+            "mapLink": iframeLink
+        }
+
+        res = requests.post(
+            "http://127.0.0.1:8000/api/notification", data=notificatonData)
 
     sleep(5)
     i += 1

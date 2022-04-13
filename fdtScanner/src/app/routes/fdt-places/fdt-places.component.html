@@ -5,14 +5,14 @@
   [disableDefaultUI]="false"
 >
   <agm-marker
+    (markerClick)="getCurrentValueSegnal(m.id)"
     *ngFor="let m of fdtlist | async"
     [latitude]="m.fdtLat"
     [longitude]="m.fdtLng"
   >
     <agm-info-window>
       <strong>{{ m.fdtName }}</strong>
+      <div>fdtvalue is {{fdtvalue}}</div>
     </agm-info-window>
   </agm-marker>
 </agm-map>
-
-

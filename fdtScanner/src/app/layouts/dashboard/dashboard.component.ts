@@ -11,7 +11,7 @@ import { Socket } from 'ngx-socket-io';
 export class DashboardComponent implements OnInit {
   public isCollapsed: boolean = false;
   public dot: boolean = false;
-  notification: any;
+  notification: any[] = [];
 
   constructor(
     private socket: Socket,
@@ -36,8 +36,6 @@ export class DashboardComponent implements OnInit {
 
   fetchNotification = () => {
     this.getNotificationList.getNotificationList().subscribe((res) => {
-      console.log(res);
-
       this.notification = res;
     });
 

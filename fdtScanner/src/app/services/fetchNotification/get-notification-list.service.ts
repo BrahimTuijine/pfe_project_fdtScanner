@@ -12,9 +12,15 @@ export class GetNotificationListService {
       'http://127.0.0.1:8000/api/notification'
     );
   };
+
+  getNotificationsById = (id: number) => {
+    return this.http.get<Notification>(
+      'http://127.0.0.1:8000/api/notification/' + id
+    );
+  };
 }
 
-interface Notification {
+export interface Notification {
   id: number;
   fdtName: string;
   value: number;

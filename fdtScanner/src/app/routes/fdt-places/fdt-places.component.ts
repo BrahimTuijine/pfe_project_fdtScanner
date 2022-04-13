@@ -17,14 +17,19 @@ export class FdtPlacesComponent implements OnInit {
 
   fdtlist: any;
   notification: any;
+  fdtvalue:any
 
-  constructor(
-    private fdtListService: FdtListService,
-    private getNotificationList: GetNotificationListService
-  ) {}
+  constructor(private fdtListService: FdtListService, private socket: Socket) {}
 
   ngOnInit(): void {
     this.fdtlist = this.fdtListService.getAllFdt();
+
+    this.socket.on('pythonSegnalValue', (data: any) => {
+      this.fdtvalue = data
+    });
   }
 
+  getCurrentValueSegnal = (fdtId: string) => {
+    this.socket.emit('getSegnalValue', fdtId);
+  };
 }

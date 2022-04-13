@@ -40,10 +40,13 @@
                 nzType="warning"
                 nzTheme="twotone"
                 nzTwotoneColor="red"
-                style="font-size: 30px; margin-top: 7px ; padding-right: 15px;"
+                style="font-size: 30px; margin-top: 7px; padding-right: 15px"
               ></i>
               <div>
-                <a routerLink="/dashboard/notification" class="notifElement">
+                <a
+                  routerLink="/dashboard/notification/{{item.id}}"
+                  class="notifElement"
+                >
                   <div class="notifTitle">
                     {{ item.fdtName }}
                   </div>
@@ -57,7 +60,9 @@
           </ul>
           <ng-template #nonotif>
             <ul nz-menu nzSelectable>
-              <li style="padding:10px"><nz-empty nzNotFoundContent="no notification"></nz-empty></li>
+              <li style="padding: 10px">
+                <nz-empty nzNotFoundContent="no notification"></nz-empty>
+              </li>
             </ul>
           </ng-template>
         </nz-dropdown-menu>

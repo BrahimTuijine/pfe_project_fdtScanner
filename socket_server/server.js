@@ -11,17 +11,21 @@ const io = require("socket.io")(http, {
 ids = {};
 
 io.on("connection", (socket) => {
-  ids[socket.handshake.headers.name] = socket.id
-  console.log("this is my object");
+  ids[socket.handshake.headers.name] = socket.id;
   console.log(ids);
-  
 
-  socket.on("showAngularNotification", (data) => {
-    io.to(ids.angular).emit("showNotification")
+  socket.on("getSegnalValue", (data) => {
+    io.to(ids[data]).emit("getCurrentValue");
+  });
+
+  socket.on("showAngularNotification", () => {
+    io.to(ids.angular).emit("showNotification");
+  });
+
+  socket.on("segnalValue", (data) => {
+    io.to(ids.angular).emit("pythonSegnalValue", data.value);
   });
 });
-
-
 
 http.listen(4444, () => {
   console.log("Listening on port 4444");

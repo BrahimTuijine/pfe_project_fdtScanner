@@ -32,7 +32,7 @@ const routes: Routes = [
         component: StatisticsComponent,
       },
       {
-        path: 'notification',
+        path: 'notification/:id',
         component: LowSignalNotificationComponent,
       },
     ],
