@@ -10,6 +10,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzInputModule,
     ReactiveFormsModule,
     NzTabsModule,
+    NzTableModule,
   ],
 })
 export class RoutesModule {}

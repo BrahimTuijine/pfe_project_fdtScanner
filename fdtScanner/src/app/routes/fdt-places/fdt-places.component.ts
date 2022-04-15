@@ -17,7 +17,8 @@ export class FdtPlacesComponent implements OnInit {
 
   fdtlist: any;
   notification: any;
-  fdtvalue:any
+  fdtvalue: any;
+  editedInput:boolean =true; 
 
   constructor(private fdtListService: FdtListService, private socket: Socket) {}
 
@@ -25,11 +26,20 @@ export class FdtPlacesComponent implements OnInit {
     this.fdtlist = this.fdtListService.getAllFdt();
 
     this.socket.on('pythonSegnalValue', (data: any) => {
-      this.fdtvalue = data
+      this.fdtvalue = data;
     });
   }
 
   getCurrentValueSegnal = (fdtId: string) => {
     this.socket.emit('getSegnalValue', fdtId);
   };
+
+  startEdit(id: string): void {}
+
+  cancelEdit(id: string): void {}
+
+  saveEdit(id: string): void {}
+
 }
+
+
