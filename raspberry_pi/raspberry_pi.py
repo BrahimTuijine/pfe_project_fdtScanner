@@ -1,4 +1,5 @@
 
+import random
 from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.by import By
@@ -52,9 +53,10 @@ def getDistinatonIframe(fdtPlace):
     embedMap = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[2]/button[2]").click()
 
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")))
+    # element = WebDriverWait(driver, 10).until(
+    #     EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")))
 
+    sleep(5)
     myframe = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")
 
@@ -97,12 +99,12 @@ def latLngToAdd(latLngTab):
     longitudeInput = driver.find_element_by_xpath(
         "//*[@id='longitude']").send_keys(latLngTab[1])
 
-    sleep(2)
+    sleep(4)
 
     getAddressBtn = driver.find_element_by_xpath(
         "/html/body/div[2]/div[2]/div[2]/div[1]/form[2]/div[3]/div/button").click()
 
-    sleep(2)
+    sleep(4)
 
     addressInput = driver.find_element_by_xpath(
         "//*[@id='address']").get_attribute('value')
@@ -158,6 +160,14 @@ while (i != len(myTab)):
 
         res = requests.post(
             "http://127.0.0.1:8000/api/notification", data=notificatonData)
+    else:
+        dailyValue = {
+            "value" : myTab[i],
+            "fdtId" : fdtId,
+        }
+        x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
+        print(x.text)
 
     sleep(5)
     i += 1
+

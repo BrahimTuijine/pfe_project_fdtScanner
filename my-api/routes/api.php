@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DailyFdtValueController;
 use App\Http\Controllers\fdtListContoller;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ Route::post('notification' , [NotificationController::class, 'store']);
 Route::get('notification', [NotificationController::class, 'index']);
 Route::get('notification/{id}', [NotificationController::class, 'show']);
 
+
+Route::get('dailyValue/{id}', [DailyFdtValueController::class, 'show']);
+Route::get('dailyValue', [DailyFdtValueController::class, 'index']);
+Route::post('dailyValue', [DailyFdtValueController::class, 'store']);
 
 
 

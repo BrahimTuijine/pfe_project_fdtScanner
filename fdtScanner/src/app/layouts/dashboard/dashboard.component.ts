@@ -34,6 +34,12 @@ export class DashboardComponent implements OnInit {
     this.fetchNotification();
   }
 
+  logout = () => {
+    const data = localStorage.removeItem('userData');
+    console.log(data);
+    
+  };
+
   fetchNotification = () => {
     this.getNotificationList.getNotificationList().subscribe((res) => {
       this.notification = res;

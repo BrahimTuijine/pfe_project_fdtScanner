@@ -44,7 +44,7 @@
               ></i>
               <div>
                 <a
-                  routerLink="/dashboard/notification/{{item.id}}"
+                  routerLink="/dashboard/notification/{{ item.id }}"
                   class="notifElement"
                 >
                   <div class="notifTitle">
@@ -68,7 +68,19 @@
         </nz-dropdown-menu>
 
         <nz-badge [nzDot]="dot"></nz-badge>
-        <nz-avatar [nzSize]="32" nzIcon="user"></nz-avatar>
+        <nz-avatar
+          [nzSize]="32"
+          nzIcon="user"
+          nz-dropdown
+          [nzDropdownMenu]="LogoutMenu"
+          nzPlacement="bottomRight"
+        ></nz-avatar>
+        <nz-dropdown-menu #LogoutMenu="nzDropdownMenu">
+          <ul nz-menu class="LogoutItem">
+            <i nz-icon nzType="logout" nzTheme="outline" class="logOutIcon"></i>
+            <button (click)="logout()" class="logoutBtn" routerLink="/">Logout</button>
+          </ul>
+        </nz-dropdown-menu>
       </div>
     </nz-header>
     <nz-content>
