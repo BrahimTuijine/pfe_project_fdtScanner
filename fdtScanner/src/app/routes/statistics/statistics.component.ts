@@ -7,9 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./statistics.component.less'],
 })
 export class StatisticsComponent implements OnInit {
-  constructor(private router: ActivatedRoute) {
-    this.router.params.subscribe((data) => console.log(data['id']));
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

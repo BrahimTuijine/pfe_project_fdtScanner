@@ -1,6 +1,6 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="welcome" *ngIf="isCollapsed == false"> 
+    <div class="welcome" *ngIf="isCollapsed == false">
       <div>Welcome</div>
       {{ username }}
     </div>
@@ -54,12 +54,12 @@
                     {{ item.fdtName }}
                   </div>
                   <div class="notifTime">
-                    {{ item.created_at }}
+                    {{ this.fixtimeForm(item.created_at) }}
                   </div>
                 </a>
+                <li nz-menu-divider *ngIf="notification.length > 1"></li>
               </div>
             </li>
-            <li nz-menu-divider *ngIf="notification.length > 1"></li>
           </ul>
           <ng-template #nonotif>
             <ul nz-menu nzSelectable>

@@ -1,3 +1,4 @@
+import { FixTimeFormService } from './../../services/fixtime/fix-time-form.service';
 import { GetNotificationListService } from './../../services/fetchNotification/get-notification-list.service';
 import { Component, OnInit } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
@@ -14,13 +15,17 @@ export class DashboardComponent implements OnInit {
   public dot: boolean = false;
   notification: any[] = [];
   storageData: any;
-  username?: string = "";
+  username?: string = '';
+  fixtimeForm: any;
 
   constructor(
     private socket: Socket,
     private toast: NgToastService,
-    private getNotificationList: GetNotificationListService
-  ) {}
+    private getNotificationList: GetNotificationListService,
+    private fixtime: FixTimeFormService
+  ) {
+    this.fixtimeForm = this.fixtime.fixTimeForm;
+  }
 
   ngOnInit(): void {
     this.socket.on('showNotification', () => {
@@ -42,12 +47,11 @@ export class DashboardComponent implements OnInit {
     this.storageData = localStorage.getItem('userData');
 
     let userData: User = JSON.parse(this.storageData);
-    return userData["name"];
+    return userData['name'];
   };
 
   logout = () => {
-    const data = localStorage.removeItem('userData');
-    // console.log(data);
+    localStorage.removeItem('userData');
   };
 
   fetchNotification = () => {

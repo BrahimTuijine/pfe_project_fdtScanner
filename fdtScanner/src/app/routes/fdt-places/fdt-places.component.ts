@@ -1,3 +1,4 @@
+import { FixTimeFormService } from './../../services/fixtime/fix-time-form.service';
 import { FdtListService } from './../../services/getFdtList/fdt-list.service';
 import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
@@ -10,7 +11,7 @@ import { GetNotificationListService } from 'src/app/services/fetchNotification/g
 })
 export class FdtPlacesComponent implements OnInit {
   // zoom level
-  zoom: number = 12;
+  zoom: number = 8;
   // start position
   lat = 36.88244379050573;
   lng = 10.169747056472744;
@@ -18,12 +19,23 @@ export class FdtPlacesComponent implements OnInit {
   fdtlist: any;
   notification: any;
   fdtvalue: any;
-  editedInput:boolean =true; 
+  editedInput: boolean = true;
+  fixtimeForm: any;
 
-  constructor(private fdtListService: FdtListService, private socket: Socket) {}
+  constructor(
+    private fdtListService: FdtListService,
+    private socket: Socket,
+    private fixtime: FixTimeFormService
+  ) {
+
+    this.fixtimeForm = this.fixtime.fixTimeForm
+  }
 
   ngOnInit(): void {
-    this.fdtlist = this.fdtListService.getAllFdt();
+
+    this.fdtListService.getAllFdt().subscribe((data) => {
+      this.fdtlist = data;
+    });
 
     this.socket.on('pythonSegnalValue', (data: any) => {
       this.fdtvalue = data;
@@ -33,13 +45,4 @@ export class FdtPlacesComponent implements OnInit {
   getCurrentValueSegnal = (fdtId: string) => {
     this.socket.emit('getSegnalValue', fdtId);
   };
-
-  startEdit(id: string): void {}
-
-  cancelEdit(id: string): void {}
-
-  saveEdit(id: string): void {}
-
 }
-
-

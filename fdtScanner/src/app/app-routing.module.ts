@@ -7,7 +7,7 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IsAllowedGuard } from './gards/is-allowed.guard';
+import { IsAllowedGuard } from './guards/is-allowed.guard';
 
 const routes: Routes = [
   {
