@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DailyFdtValueController;
 use App\Http\Controllers\fdtListContoller;
 use App\Http\Controllers\NotificationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

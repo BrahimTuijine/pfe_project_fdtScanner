@@ -1,7 +1,6 @@
 import { LoginService } from './../../services/auth/login.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 
@@ -24,8 +23,9 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.loginService.login(this.validateForm.value).subscribe({
         next: (data) => {
-          // console.log(data);
-          localStorage.setItem('userData', JSON.stringify(data));
+          // console.log();
+          localStorage.setItem('userData', JSON.stringify(data.user));
+          
           this.toast.success({
             detail: 'SUCCESS Message',
             summary: 'Login Successfully',

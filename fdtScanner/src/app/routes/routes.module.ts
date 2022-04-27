@@ -29,7 +29,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     ReactiveFormsModule,
     NzTabsModule,
-    NzTableModule,
+    NzTableModule
   ],
 })
 export class RoutesModule {}

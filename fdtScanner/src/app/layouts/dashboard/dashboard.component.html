@@ -1,6 +1,9 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="welcome" *ngIf="isCollapsed == false"> 
+      <div>Welcome</div>
+      {{ username }}
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="/dashboard/fdtplaces" [nzSelected]="true">
         <i nz-icon nzType="environment" nzTheme="outline"> </i> <span>Map</span>
@@ -78,7 +81,9 @@
         <nz-dropdown-menu #LogoutMenu="nzDropdownMenu">
           <ul nz-menu class="LogoutItem">
             <i nz-icon nzType="logout" nzTheme="outline" class="logOutIcon"></i>
-            <button (click)="logout()" class="logoutBtn" routerLink="/">Logout</button>
+            <button (click)="logout()" class="logoutBtn" routerLink="/">
+              Logout
+            </button>
           </ul>
         </nz-dropdown-menu>
       </div>

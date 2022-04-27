@@ -2,6 +2,7 @@ import { GetNotificationListService } from './../../services/fetchNotification/g
 import { Component, OnInit } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { Socket } from 'ngx-socket-io';
+import { User } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ export class DashboardComponent implements OnInit {
   public isCollapsed: boolean = false;
   public dot: boolean = false;
   notification: any[] = [];
+  storageData: any;
+  username?: string = "";
 
   constructor(
     private socket: Socket,
@@ -32,12 +35,19 @@ export class DashboardComponent implements OnInit {
       }
     });
     this.fetchNotification();
+    this.username = this.getUserData();
   }
+
+  getUserData = () => {
+    this.storageData = localStorage.getItem('userData');
+
+    let userData: User = JSON.parse(this.storageData);
+    return userData["name"];
+  };
 
   logout = () => {
     const data = localStorage.removeItem('userData');
-    console.log(data);
-    
+    // console.log(data);
   };
 
   fetchNotification = () => {

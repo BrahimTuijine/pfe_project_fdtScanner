@@ -13,8 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule } from 'ng-angular-popup';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { GridModule } from '@syncfusion/ej2-angular-grids';
-import { ChartModule, LineSeriesService } from '@syncfusion/ej2-angular-charts';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 registerLocaleData(en);
 const config: SocketIoConfig = {
@@ -27,7 +26,7 @@ const config: SocketIoConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,10 +37,8 @@ const config: SocketIoConfig = {
     RoutesModule,
     NgToastModule,
     SocketIoModule.forRoot(config),
-    GridModule,
-    ChartModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, LineSeriesService],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

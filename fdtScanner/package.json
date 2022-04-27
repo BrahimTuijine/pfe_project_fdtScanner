@@ -12,6 +12,7 @@
   "dependencies": {
     "@agm/core": "^1.1.0",
     "@angular/animations": "~13.2.0",
+    "@angular/cdk": "^13.3.4",
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
     "@angular/core": "~13.2.0",
@@ -19,8 +20,6 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
-    "@syncfusion/ej2-angular-charts": "^20.1.48",
-    "@syncfusion/ej2-angular-grids": "^20.1.48",
     "ng-angular-popup": "^0.1.2",
     "ng-zorro-antd": "^13.1.1",
     "ngx-socket-io": "^4.2.0",
