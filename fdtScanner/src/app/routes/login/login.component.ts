@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.loginService.login(this.validateForm.value).subscribe({
         next: (data) => {
-          // console.log();
           localStorage.setItem('userData', JSON.stringify(data.user));
           
           this.toast.success({

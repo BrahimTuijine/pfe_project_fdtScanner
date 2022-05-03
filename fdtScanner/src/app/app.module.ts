@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule } from 'ng-angular-popup';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 registerLocaleData(en);
 const config: SocketIoConfig = {
@@ -26,7 +26,7 @@ const config: SocketIoConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

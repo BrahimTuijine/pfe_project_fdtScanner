@@ -12,6 +12,14 @@
         <i nz-icon nzType="line-chart" nzTheme="outline"></i>
         <span>Statistics</span>
       </li>
+      <li nz-menu-item routerLink="/dashboard/request">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>
+        <span>request</span>
+      </li>
+      <li nz-menu-item routerLink="/dashboard/fdtList">
+        <i nz-icon nzType="ordered-list" nzTheme="outline"></i>
+        <span>Boite list</span>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -57,7 +65,6 @@
                     {{ this.fixtimeForm(item.created_at) }}
                   </div>
                 </a>
-                <li nz-menu-divider *ngIf="notification.length > 1"></li>
               </div>
             </li>
           </ul>
@@ -80,8 +87,8 @@
         ></nz-avatar>
         <nz-dropdown-menu #LogoutMenu="nzDropdownMenu">
           <ul nz-menu class="LogoutItem">
-            <i nz-icon nzType="logout" nzTheme="outline" class="logOutIcon"></i>
             <button (click)="logout()" class="logoutBtn" routerLink="/">
+              <i nz-icon nzType="logout" nzTheme="outline" class="logOutIcon"></i>
               Logout
             </button>
           </ul>

@@ -11,6 +11,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { FdtListComponent } from './fdt-list/fdt-list.component';
+import { RequestComponent } from './request/request.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     StatisticsComponent,
     LowSignalNotificationComponent,
     LoginComponent,
+    FdtListComponent,
+    RequestComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     ReactiveFormsModule,
     NzTabsModule,
-    NzTableModule
+    NzTableModule,
   ],
 })
 export class RoutesModule {}

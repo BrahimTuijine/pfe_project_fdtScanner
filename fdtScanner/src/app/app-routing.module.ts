@@ -1,4 +1,4 @@
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RequestComponent } from './routes/request/request.component';
 import { LoginComponent } from './routes/login/login.component';
 import { LowSignalNotificationComponent } from './routes/low-signal-notification/low-signal-notification.component';
 import { StatisticsComponent } from './routes/statistics/statistics.component';
@@ -8,6 +8,7 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAllowedGuard } from './guards/is-allowed.guard';
+import { FdtListComponent } from './routes/fdt-list/fdt-list.component';
 
 const routes: Routes = [
   {
@@ -15,11 +16,6 @@ const routes: Routes = [
     component: AuthComponent,
     children: [{ path: '', component: LoginComponent }],
   },
-
-  // {
-  //   path: '**',
-  //   component: PageNotFoundComponent,
-  // },
 
   {
     path: 'dashboard',
@@ -43,6 +39,14 @@ const routes: Routes = [
         path: 'notification/:id',
         component: LowSignalNotificationComponent,
       },
+      {
+        path : 'request',
+        component: RequestComponent 
+      },
+      {
+        path : 'fdtList',
+        component : FdtListComponent
+      }
     ],
   },
 ];
