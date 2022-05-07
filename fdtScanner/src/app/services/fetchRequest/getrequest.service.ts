@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HOST } from '../envirement';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class GetrequestService {
   constructor(private http: HttpClient) {}
 
   getRequests = () => {
-    return this.http.get<Request>('http://127.0.0.1:8000/api/fdtRequest');
+    return this.http.get<Request>( HOST +'/fdtRequest');
   };
 }
 

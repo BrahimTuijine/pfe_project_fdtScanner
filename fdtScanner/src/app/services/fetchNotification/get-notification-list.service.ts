@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HOST } from '../envirement';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +10,13 @@ export class GetNotificationListService {
 
   getNotificationList = () => {
     return this.http.get<Notification[]>(
-      'http://127.0.0.1:8000/api/notification'
+      HOST +'/notification'
     );
   };
 
   getNotificationsById = (id: number) => {
     return this.http.get<Notification>(
-      'http://127.0.0.1:8000/api/notification/' + id
+      HOST +'/notification/' + id
     );
   };
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HOST } from '../envirement';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,12 @@ export class FdtListService {
   // };
 
   getAllFdt = () => {
-    return this.http.get<Fdtlist>('http://127.0.0.1:8000/api/fdtList', {
-      // headers: this.headers,
-    });
+    return this.http.get<Fdtlist>(HOST + '/fdtList');
   };
+
+  updateFdt = (fdt: Fdtlist) => {
+    return this.http.put<Fdtlist>(HOST + '/fdtList/' + fdt.id, fdt);
+  }
 }
 
 export interface Fdtlist {
@@ -27,3 +30,4 @@ export interface Fdtlist {
   created_at?: Date;
   updated_at?: Date;
 }
+

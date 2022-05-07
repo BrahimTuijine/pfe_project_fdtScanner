@@ -12,7 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { FdtListComponent } from './fdt-list/fdt-list.component';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { RequestComponent } from './request/request.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { RequestComponent } from './request/request.component';
     ReactiveFormsModule,
     NzTabsModule,
     NzTableModule,
+    NzDividerModule,
+    NzModalModule,
   ],
 })
 export class RoutesModule {}

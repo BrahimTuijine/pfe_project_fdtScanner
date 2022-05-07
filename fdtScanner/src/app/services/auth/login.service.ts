@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HOST } from '../envirement';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class LoginService {
 
   login(body: any) {
     return this.http.post<LoginResponse>(
-      'http://127.0.0.1:8000/api/login',
+      HOST + '/login',
       body,
       {
         headers: this.headers,
