@@ -25,6 +25,11 @@ io.on("connection", (socket) => {
   socket.on("segnalValue", (data) => {
     io.to(ids.angular).emit("pythonSegnalValue", data.value);
   });
+
+  socket.on("userAccept", (data) => {
+    console.log(ids[data])
+    io.to(ids[data]).emit("requestAccepted");
+  });
 });
 
 http.listen(4444, () => {

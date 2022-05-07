@@ -16,18 +16,26 @@ def getDistinatonIframe(fdtPlace):
 
     driver.get("https://www.google.com/maps/")
 
-    wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//*[@id='xoLGzf-T3iPGc']")))
+    # wait.until(EC.element_to_be_clickable(
+    #     (By.XPATH, "//*[@id='xoLGzf-T3iPGc']")))
+
+    sleep(5)
 
     directionBtn = driver.find_element_by_xpath(
-        "//*[@id='xoLGzf-T3iPGc']").click()
+        "//*[@id='hArJGc']").click()
 
-    driver.implicitly_wait(10)
+    sleep(3)
+
+    driver.find_element_by_xpath(
+        "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[3]/div[1]/div[1]/div[2]/div[1]/div/input").clear()
+
+    sleep(5)
 
     originInput = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[3]/div[1]/div[1]/div[2]/div[1]/div/input").send_keys(fdtPlace)
 
-    driver.implicitly_wait(10)
+    # driver.implicitly_wait(10)
+    sleep(5)
 
     distinationInput = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[3]/div[1]/div[2]/div[2]/div[1]/div/input").send_keys("Ariana")
@@ -38,7 +46,7 @@ def getDistinatonIframe(fdtPlace):
     searchBtn = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[3]/div[1]/div[2]/div[2]/button[1]").click()
 
-    sleep(2)
+    sleep(5)
 
     menuBtn = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[3]/div[1]/div[2]/div/div[1]/button").click()
@@ -48,7 +56,7 @@ def getDistinatonIframe(fdtPlace):
     mapBtn = driver.find_element_by_xpath(
         "/html/body/div[3]/div[9]/div[25]/div/div[2]/ul/div[5]/li[1]/button").click()
 
-    sleep(4)
+    sleep(5)
 
     embedMap = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[2]/button[2]").click()
@@ -59,6 +67,7 @@ def getDistinatonIframe(fdtPlace):
     sleep(5)
     myframe = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")
+    
 
     iframe = myframe.get_attribute('value')
 
@@ -124,50 +133,69 @@ def registerInFdtList(fdtPlace, location):
     return x.json()["id"]
 
 
+def SendRequest(fdtPlace):
+    myData = {
+        "name": fdtPlace,
+    }
+    x = requests.post("http://127.0.0.1:8000/api/fdtRequest", data=myData)
+    return x.json()["id"]
+
+
 myLatLng = myLocation()
-fdtAddresse = latLngToAdd(myLatLng)
+# fdtAddresse = latLngToAdd(myLatLng)
+# requestId = SendRequest(fdtAddresse)
+
 location = myLatLng[0] + "," + myLatLng[1]
+
 iframeLink = getDistinatonIframe(location).split()[1][:-1].replace('src="', '')
-fdtId = registerInFdtList(fdtAddresse, myLatLng)
+
+print(iframeLink)
 
 
-sio = socketio.Client()
 
-sio.connect('http://localhost:4444',
-            headers={"name": str(fdtId)})
+# sio = socketio.Client()
 
-myTab = [9, 8, 12, 7]
-
-i = 0
+# sio.connect('http://localhost:4444',
+#             headers={"name": str(requestId)})
 
 
-@sio.on('getCurrentValue')
-def on_message():
-    sio.emit("segnalValue", {"value": myTab[3]})
+# @sio.on('requestAccepted')
+# def on_message():
+#     sio.disconnect()
+#     fdtId = registerInFdtList(fdtAddresse, myLatLng)
+#     sleep(5)
+#     sio.connect('http://localhost:4444',
+#                 headers={"name": str(fdtId)})
+
+    # myTab = [9, 8, 12, 7]
+    # i = 0
+
+    # @sio.on('getCurrentValue')
+    # def on_message():
+    #     sio.emit("segnalValue", {"value": myTab[3]})
 
 
-while (i != len(myTab)):
+    # while (i != len(myTab)):
 
-    print(i)
-    if(myTab[i] > 10):
-        sio.emit('showAngularNotification')
+    #     print(i)
+    #     if(myTab[i] > 10):
+    #         sio.emit('showAngularNotification')
 
-        notificatonData = {
-            "fdtName": fdtAddresse,
-            "value": myTab[i],
-            "mapLink": iframeLink
-        }
+    #         notificatonData = {
+    #             "fdtName": fdtAddresse,
+    #             "value": myTab[i],
+    #             "mapLink": iframeLink
+    #         }
 
-        res = requests.post(
-            "http://127.0.0.1:8000/api/notification", data=notificatonData)
-    else:
-        dailyValue = {
-            "value" : myTab[i],
-            "fdtId" : fdtId,
-        }
-        x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
-        print(x.text)
+    #         res = requests.post(
+    #             "http://127.0.0.1:8000/api/notification", data=notificatonData)
+    #     else:
+    #         dailyValue = {
+    #             "value" : myTab[i],
+    #             "fdtId" : fdtId,
+    #         }
+    #         x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
+    #         print(x.text)
 
-    sleep(5)
-    i += 1
-
+    #     sleep(5)
+    #     i += 1
