@@ -1,1 +1,51 @@
-<p>fdt-list works!</p>
+ <nz-table #basicTable [nzLoading]="isLoading" [nzData]="fdtlist">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Boite Name</th>
+          <th>FdtLat</th>
+          <th>FdtLng</th>
+          <th>Created At</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td [nzAlign]="'center'">{{data.id}}</td>
+          <td [nzAlign]="'center'" >{{data.fdtName}}</td>
+          <td [nzAlign]="'center'" >{{data.fdtLat}}</td>
+          <td [nzAlign]="'center'" >{{data.fdtLng}}</td>
+          <td [nzAlign]="'center'">{{data.created_at}}</td>
+          <td [nzAlign]="'center'"><a (click)="editFdt(data)" >Edit</a></td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+
+    <!-- edit modal-->
+    <nz-modal [(nzVisible)]="visible" nzTitle="Edit Boite" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <form nz-form [formGroup]="fdtUpdateFrom" nzLayout="horizontal">
+            <nz-form-item  nzFlex>
+                <nz-form-label nzFor="fdtname" nzSpan="6" nzRequired>Fdt Name</nz-form-label>
+                <nz-form-control nzSpan="14">
+                  <input nz-input formControlName="fdtName" id="name" name="name">
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item  nzFlex>
+                <nz-form-label nzFor="fdtlan" nzSpan="6" nzRequired>Fdt Lat</nz-form-label>
+                <nz-form-control nzSpan="14">
+                  <input nz-input formControlName="fdtLat" id="name" name="name">
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item  nzFlex>
+                <nz-form-label nzFor="fdtname" nzSpan="6" nzRequired>fdt Lng</nz-form-label>
+                <nz-form-control nzSpan="14">
+                  <input nz-input formControlName="fdtLng" id="name" name="name">
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+      </ng-container>
+    </nz-modal>
