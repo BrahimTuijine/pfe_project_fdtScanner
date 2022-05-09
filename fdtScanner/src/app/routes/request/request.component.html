@@ -1,5 +1,37 @@
-<p>request works!</p>
-
-
-
-<button (click)="acceptRequest()">accept</button>
+<nz-table #basicTable [nzData]="requestList">
+  <thead>
+    <tr>
+      <th [nzAlign]="'center'">State</th>
+      <th [nzAlign]="'center'">Id</th>
+      <th [nzAlign]="'center'">Boite Name</th>
+      <th [nzAlign]="'center'">Created At</th>
+      <th [nzAlign]="'center'">Who accepted</th>
+      <th [nzAlign]="'center'">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td [nzAlign]="'center'">
+        <!-- if data.state is true the boite accepted -->
+        <div
+          *ngIf="data.state == 'true'; else notAccepted"
+          class="acceptedState"
+        >
+          box accepted
+        </div>
+        <ng-template #notAccepted>
+          <div class="notAcceptedState">box not accepted</div>
+        </ng-template>
+      </td>
+      <td [nzAlign]="'center'">{{ data.id }}</td>
+      <td [nzAlign]="'center'">{{ data.name }}</td>
+      <td [nzAlign]="'center'">{{ data.created_at }}</td>
+      <td [nzAlign]="'center'">{{ data.user }}</td>
+      <td [nzAlign]="'center'">
+        <button nz-button (click)="acceptRequest(data)" [disabled]="data.state">
+          Accept Request
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -24,6 +24,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('fdtList' , [fdtListContoller::class, 'store']);
 Route::get('fdtList', [fdtListContoller::class, 'index']);
+Route::put('fdtList/{id}', [fdtListContoller::class, 'update']);
+
 
 Route::post('notification' , [NotificationController::class, 'store']);
 Route::get('notification', [NotificationController::class, 'index']);
@@ -36,6 +38,7 @@ Route::post('dailyValue', [DailyFdtValueController::class, 'store']);
 
 Route::post('fdtRequest', [FdtRequestController::class, 'store']);
 Route::get('fdtRequest', [FdtRequestController::class, 'index']);
+Route::put('fdtRequest/{id}', [FdtRequestController::class, 'update']);
 
 
 

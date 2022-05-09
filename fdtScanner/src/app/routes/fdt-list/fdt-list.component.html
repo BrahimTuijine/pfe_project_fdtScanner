@@ -1,12 +1,12 @@
  <nz-table #basicTable [nzLoading]="isLoading" [nzData]="fdtlist">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Boite Name</th>
-          <th>FdtLat</th>
-          <th>FdtLng</th>
-          <th>Created At</th>
-          <th>Action</th>
+          <th [nzAlign]="'center'">Id</th>
+          <th [nzAlign]="'center'">Boite Name</th>
+          <th [nzAlign]="'center'">FdtLat</th>
+          <th [nzAlign]="'center'">FdtLng</th>
+          <th [nzAlign]="'center'">Created At</th>
+          <th [nzAlign]="'center'">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -15,7 +15,7 @@
           <td [nzAlign]="'center'" >{{data.fdtName}}</td>
           <td [nzAlign]="'center'" >{{data.fdtLat}}</td>
           <td [nzAlign]="'center'" >{{data.fdtLng}}</td>
-          <td [nzAlign]="'center'">{{data.created_at}}</td>
+          <td [nzAlign]="'center'">{{this.fixtimeForm(data.created_at)}}</td>
           <td [nzAlign]="'center'"><a (click)="editFdt(data)" >Edit</a></td>
         </tr>
       </tbody>

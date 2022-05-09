@@ -11,5 +11,7 @@ class FdtRequest extends Model
 
     protected $fillable = [
         'name',
+        'user',
+        'state'
     ];
 }

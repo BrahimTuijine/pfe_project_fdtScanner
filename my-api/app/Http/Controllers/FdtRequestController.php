@@ -52,7 +52,9 @@ class FdtRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $oneRequest = FdtRequest::find($id);
+        $oneRequest->update($request->all());
+        return $oneRequest;
     }
 
     /**

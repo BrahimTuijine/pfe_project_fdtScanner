@@ -136,66 +136,68 @@ def registerInFdtList(fdtPlace, location):
 def SendRequest(fdtPlace):
     myData = {
         "name": fdtPlace,
+        "state" : "notAccepted",
     }
     x = requests.post("http://127.0.0.1:8000/api/fdtRequest", data=myData)
     return x.json()["id"]
 
 
 myLatLng = myLocation()
-# fdtAddresse = latLngToAdd(myLatLng)
-# requestId = SendRequest(fdtAddresse)
+fdtAddresse = latLngToAdd(myLatLng)
+requestId = SendRequest(fdtAddresse)
 
 location = myLatLng[0] + "," + myLatLng[1]
 
 iframeLink = getDistinatonIframe(location).split()[1][:-1].replace('src="', '')
 
-print(iframeLink)
 
 
 
-# sio = socketio.Client()
+sio = socketio.Client()
 
-# sio.connect('http://localhost:4444',
-#             headers={"name": str(requestId)})
-
-
-# @sio.on('requestAccepted')
-# def on_message():
-#     sio.disconnect()
-#     fdtId = registerInFdtList(fdtAddresse, myLatLng)
-#     sleep(5)
-#     sio.connect('http://localhost:4444',
-#                 headers={"name": str(fdtId)})
-
-    # myTab = [9, 8, 12, 7]
-    # i = 0
-
-    # @sio.on('getCurrentValue')
-    # def on_message():
-    #     sio.emit("segnalValue", {"value": myTab[3]})
+sio.connect('http://localhost:4444',
+            headers={"name": str(requestId)})
+print('im conntected to Socket')
 
 
-    # while (i != len(myTab)):
+@sio.on('requestAccepted')
+def on_message():
+    sio.disconnect()
+    fdtId = registerInFdtList(fdtAddresse, myLatLng)
+    sleep(5)
+    sio.connect('http://localhost:4444',
+                headers={"name": str(fdtId)})
 
-    #     print(i)
-    #     if(myTab[i] > 10):
-    #         sio.emit('showAngularNotification')
+    myTab = [9, 8, 12, 7]
+    i = 0
 
-    #         notificatonData = {
-    #             "fdtName": fdtAddresse,
-    #             "value": myTab[i],
-    #             "mapLink": iframeLink
-    #         }
+    @sio.on('getCurrentValue')
+    def on_message():
+        sio.emit("segnalValue", {"value": myTab[3]})
 
-    #         res = requests.post(
-    #             "http://127.0.0.1:8000/api/notification", data=notificatonData)
-    #     else:
-    #         dailyValue = {
-    #             "value" : myTab[i],
-    #             "fdtId" : fdtId,
-    #         }
-    #         x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
-    #         print(x.text)
 
-    #     sleep(5)
-    #     i += 1
+    while (i != len(myTab)):
+
+        print(i)
+        if(myTab[i] > 10):
+            sio.emit('showAngularNotification')
+
+            notificatonData = {
+                "fdtName": fdtAddresse,
+                "value": myTab[i],
+                "mapLink": iframeLink
+            }
+
+            requests.post(
+                "http://127.0.0.1:8000/api/notification", data=notificatonData)
+
+        else:
+            dailyValue = {
+                "value" : myTab[i],
+                "fdtId" : fdtId,
+            }
+            x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
+            print(x.text)
+
+        sleep(5)
+        i += 1

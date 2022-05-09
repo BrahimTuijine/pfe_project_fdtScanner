@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FixTimeFormService } from 'src/app/services/fixtime/fix-time-form.service';
 import {
   Fdtlist,
   FdtListService,
@@ -19,11 +20,15 @@ export class FdtListComponent implements OnInit {
 
   // form
   fdtUpdateFrom! : FormGroup ;
+  fixtimeForm: any;
 
   constructor(
     private fdtlistService: FdtListService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private fixtime: FixTimeFormService
+  ) {
+    this.fixtimeForm = this.fixtime.fixTimeForm;
+  }
 
   ngOnInit(): void {
     this.fdtUpdateFrom = this.fb.group({

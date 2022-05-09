@@ -40,10 +40,10 @@ export class DashboardComponent implements OnInit {
       }
     });
     this.fetchNotification();
-    this.username = this.getUserData();
+    this.username = this.getUserName();
   }
 
-  getUserData = () => {
+   getUserName = () => {
     this.storageData = localStorage.getItem('userData');
 
     let userData: User = JSON.parse(this.storageData);

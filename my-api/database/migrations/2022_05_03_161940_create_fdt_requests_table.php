@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('fdt_requests', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("user");
+            $table->string("state");
             $table->timestamps();
         });
     }

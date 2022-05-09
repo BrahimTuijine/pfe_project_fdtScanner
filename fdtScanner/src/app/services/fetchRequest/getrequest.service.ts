@@ -9,13 +9,22 @@ export class GetrequestService {
   constructor(private http: HttpClient) {}
 
   getRequests = () => {
-    return this.http.get<Request>( HOST +'/fdtRequest');
+    return this.http.get<FdtRequest>(HOST + '/fdtRequest');
+  };
+
+  updateRequest = (request: FdtRequest) => {
+    return this.http.put<FdtRequest>(
+      HOST + '/fdtRequest/' + request.id,
+      request
+    );
   };
 }
 
-export interface Request {
+export interface FdtRequest {
   id: number;
   name: string;
   created_at: Date;
   updated_at: Date;
+  state: string;
+  user: string;
 }
