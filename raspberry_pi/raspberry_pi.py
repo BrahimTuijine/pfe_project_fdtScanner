@@ -67,7 +67,6 @@ def getDistinatonIframe(fdtPlace):
     sleep(5)
     myframe = driver.find_element_by_xpath(
         "/html/body/div[3]/div[1]/div/div[2]/div/div[3]/div/div/div/div[3]/div[1]/input")
-    
 
     iframe = myframe.get_attribute('value')
 
@@ -136,14 +135,18 @@ def registerInFdtList(fdtPlace, location):
 def SendRequest(fdtPlace):
     myData = {
         "name": fdtPlace,
-        "state" : "notAccepted",
+        "state": "false",
+        "user": "----------"
     }
     x = requests.post("http://127.0.0.1:8000/api/fdtRequest", data=myData)
     return x.json()["id"]
 
+def SendNtifInfo():
+    sio.emit('showAngularNotificationInfo')
 
 myLatLng = myLocation()
 fdtAddresse = latLngToAdd(myLatLng)
+sleep(1)
 requestId = SendRequest(fdtAddresse)
 
 location = myLatLng[0] + "," + myLatLng[1]
@@ -151,13 +154,12 @@ location = myLatLng[0] + "," + myLatLng[1]
 iframeLink = getDistinatonIframe(location).split()[1][:-1].replace('src="', '')
 
 
-
-
 sio = socketio.Client()
 
 sio.connect('http://localhost:4444',
             headers={"name": str(requestId)})
-print('im conntected to Socket')
+
+SendNtifInfo()
 
 
 @sio.on('requestAccepted')
@@ -174,7 +176,6 @@ def on_message():
     @sio.on('getCurrentValue')
     def on_message():
         sio.emit("segnalValue", {"value": myTab[3]})
-
 
     while (i != len(myTab)):
 
@@ -193,10 +194,11 @@ def on_message():
 
         else:
             dailyValue = {
-                "value" : myTab[i],
-                "fdtId" : fdtId,
+                "value": myTab[i],
+                "fdtId": fdtId,
             }
-            x = requests.post("http://127.0.0.1:8000/api/dailyValue" , data=dailyValue)
+            x = requests.post(
+                "http://127.0.0.1:8000/api/dailyValue", data=dailyValue)
             print(x.text)
 
         sleep(5)

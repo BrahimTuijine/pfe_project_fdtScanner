@@ -19,7 +19,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("showAngularNotification", () => {
-    io.to(ids.angular).emit("showNotification");
+    io.to(ids.angular).emit("showNotification" );
+  });
+  socket.on("showAngularNotificationInfo", () => {
+    io.to(ids.angular).emit("showNotificationInfo" );
   });
 
   socket.on("segnalValue", (data) => {

@@ -31,7 +31,18 @@ export class DashboardComponent implements OnInit {
     this.socket.on('showNotification', () => {
       this.toast.error({
         detail: 'ERROR Message',
-        summary: 'there is a problem in python',
+        summary: 'there is a problem in box',
+        duration: 5000,
+      });
+
+      if (this.dot == false) {
+        this.dot = true;
+      }
+    });
+    this.socket.on('showNotificationInfo', () => {
+      this.toast.info({
+        detail: 'info Message',
+        summary: 'there is another box',
         duration: 5000,
       });
 
@@ -43,7 +54,7 @@ export class DashboardComponent implements OnInit {
     this.username = this.getUserName();
   }
 
-   getUserName = () => {
+  getUserName = () => {
     this.storageData = localStorage.getItem('userData');
 
     let userData: User = JSON.parse(this.storageData);

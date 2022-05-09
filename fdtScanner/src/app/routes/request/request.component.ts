@@ -14,23 +14,25 @@ import { User } from 'src/app/services/auth/login.service';
 })
 export class RequestComponent implements OnInit {
   requestList: FdtRequest[] = [];
-  fixtimeForm: any;
   storageData: any;
   userName: any;
+  fixedTime : any
 
   constructor(
     private getrequest: GetrequestService,
     private socket: Socket,
-    private fixtime: FixTimeFormService
   ) {
-    this.fixtimeForm = this.fixtime.fixTimeForm;
   }
-
+  
   ngOnInit(): void {
     this.getrequest.getRequests().subscribe((data: any) => {
-      this.requestList = data;
+      this.requestList = data;      
     });
   }
+
+  fixTimeForm = (time: string) => {
+    return time.substring(0, 10) + ' -> ' + time.slice(11 , 16);
+  };
 
   acceptRequest = (data: FdtRequest) => {
     this.socket.emit('userAccept', data.id);
