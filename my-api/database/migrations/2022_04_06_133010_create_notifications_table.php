@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string("fdtName");
-            $table->double("value");
-            $table->longtext("mapLink");
+            $table->double("value")->nullable();
+            $table->longtext("mapLink")->nullable();
+            $table->string("type");
             $table->timestamps();
         });
     }

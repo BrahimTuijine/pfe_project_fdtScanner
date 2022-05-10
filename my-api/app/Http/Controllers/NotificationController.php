@@ -27,8 +27,7 @@ class NotificationController extends Controller
     {
         $request->validate([
             "fdtName" => "required",
-            "value" => "required ",
-            "mapLink" => "required ",
+            "type" => "required",
         ]);
 
         return Notification::create($request->all());

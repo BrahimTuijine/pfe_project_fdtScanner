@@ -67,6 +67,8 @@ export class DashboardComponent implements OnInit {
 
   fetchNotification = () => {
     this.getNotificationList.getNotificationList().subscribe((res) => {
+      console.log(res);
+
       this.notification = res;
     });
 

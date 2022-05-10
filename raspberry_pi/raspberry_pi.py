@@ -141,8 +141,16 @@ def SendRequest(fdtPlace):
     x = requests.post("http://127.0.0.1:8000/api/fdtRequest", data=myData)
     return x.json()["id"]
 
+
 def SendNtifInfo():
     sio.emit('showAngularNotificationInfo')
+    notificatonData = {
+        "fdtName": fdtAddresse,
+        "type": "info"
+    }
+    requests.post(
+        "http://127.0.0.1:8000/api/notification", data=notificatonData)
+
 
 myLatLng = myLocation()
 fdtAddresse = latLngToAdd(myLatLng)
@@ -186,7 +194,9 @@ def on_message():
             notificatonData = {
                 "fdtName": fdtAddresse,
                 "value": myTab[i],
-                "mapLink": iframeLink
+                "mapLink": iframeLink,
+                "type": "error"
+
             }
 
             requests.post(
@@ -199,7 +209,6 @@ def on_message():
             }
             x = requests.post(
                 "http://127.0.0.1:8000/api/dailyValue", data=dailyValue)
-            print(x.text)
 
         sleep(5)
         i += 1

@@ -13,5 +13,6 @@ class Notification extends Model
         'fdtName',
         'value',
         'mapLink',
+        "type"
     ];
 }

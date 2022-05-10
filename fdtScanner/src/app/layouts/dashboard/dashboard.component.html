@@ -45,29 +45,65 @@
             nzSelectable
             *ngIf="notification.length > 0; else nonotif"
           >
-            <li *ngFor="let item of notification" class="notifComponent"> 
-              <i
-                nz-icon
-                nzType="warning"
-                nzTheme="twotone"
-                nzTwotoneColor="red"
-                style="font-size: 30px; margin-top: 7px; padding-right: 15px"
-              ></i>
-              <div>
-                <a
-                  routerLink="/dashboard/notification/{{ item.id }}"
-                  class="notifElement"
-                >
-                  <div class="notifTitle">
-                    {{ item.fdtName }}
-                  </div>
-                  <div class="notifTime">
-                    {{ this.fixtimeForm(item.created_at) }}
-                  </div>
-                </a>
+            <li *ngFor="let item of notification; let i = index">
+              <div
+                *ngIf="item.type == 'error'; else notifInfo"
+                class="notifComponent"
+                [ngStyle]="{
+                  'border-bottom':
+                    notification.length - 1 == i ? 'none' : '0.5 solid'
+                }"
+              >
+                <i
+                  nz-icon
+                  nzType="warning"
+                  nzTheme="twotone"
+                  nzTwotoneColor="red"
+                  style="font-size: 30px; margin-top: 7px; padding-right: 15px"
+                ></i>
+                <div>
+                  <a
+                    routerLink="/dashboard/notification/{{ item.id }}"
+                    class="notifElement"
+                  >
+                    <div class="notifTitle">
+                      {{ item.fdtName }}
+                    </div>
+                    <div class="notifTime">
+                      {{ this.fixtimeForm(item.created_at) }}
+                    </div>
+                  </a>
+                </div>
               </div>
+              <ng-template #notifInfo>
+                <div class="notifComponent">
+                  <i
+                    nz-icon
+                    nzType="info-circle"
+                    nzTheme="outline"
+                    
+                    style="
+                      color:#AADAFF;
+                      font-size: 30px;
+                      margin-top: 7px;
+                      padding-right: 15px;
+                    "
+                  ></i>
+                  <div>
+                    <a routerLink="/dashboard/request" class="notifElement">
+                      <div class="notifTitle">
+                        {{ item.fdtName }}
+                      </div>
+                      <div class="notifTime">
+                        {{ this.fixtimeForm(item.created_at) }}
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </ng-template>
             </li>
           </ul>
+
           <ng-template #nonotif>
             <ul nz-menu nzSelectable>
               <li style="padding: 10px">
@@ -88,7 +124,12 @@
         <nz-dropdown-menu #LogoutMenu="nzDropdownMenu">
           <ul nz-menu class="LogoutItem">
             <button (click)="logout()" class="logoutBtn" routerLink="/">
-              <i nz-icon nzType="logout" nzTheme="outline" class="logOutIcon"></i>
+              <i
+                nz-icon
+                nzType="logout"
+                nzTheme="outline"
+                class="logOutIcon"
+              ></i>
               Logout
             </button>
           </ul>

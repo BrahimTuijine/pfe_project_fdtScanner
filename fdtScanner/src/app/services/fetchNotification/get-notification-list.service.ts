@@ -25,6 +25,7 @@ export interface Notification {
   id: number;
   fdtName: string;
   value: number;
+  type:string;
   mapLink: string;
   created_at: Date;
   updated_at: Date;
