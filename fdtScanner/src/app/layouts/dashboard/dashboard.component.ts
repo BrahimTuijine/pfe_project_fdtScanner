@@ -25,6 +25,17 @@ export class DashboardComponent implements OnInit {
     private fixtime: FixTimeFormService
   ) {
     this.fixtimeForm = this.fixtime.fixTimeForm;
+    this.socket.on('showNotificationInfo', () => {
+      this.toast.info({
+        detail: 'info Message',
+        summary: 'there is another box',
+        duration: 10000,
+      });
+
+      if (this.dot == false) {
+        this.dot = true;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -32,24 +43,14 @@ export class DashboardComponent implements OnInit {
       this.toast.error({
         detail: 'ERROR Message',
         summary: 'there is a problem in box',
-        duration: 5000,
+        duration: 10000,
       });
 
       if (this.dot == false) {
         this.dot = true;
       }
     });
-    this.socket.on('showNotificationInfo', () => {
-      this.toast.info({
-        detail: 'info Message',
-        summary: 'there is another box',
-        duration: 5000,
-      });
-
-      if (this.dot == false) {
-        this.dot = true;
-      }
-    });
+    
     this.fetchNotification();
     this.username = this.getUserName();
   }

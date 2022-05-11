@@ -15,6 +15,9 @@ import { FdtListComponent } from './fdt-list/fdt-list.component';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { RequestComponent } from './request/request.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzTableModule,
     NzDividerModule,
     NzModalModule,
+    NzStatisticModule,
+    NzCardModule,
+    NzIconModule,
   ],
 })
 export class RoutesModule {}

@@ -39,11 +39,12 @@
         >
           <i nz-icon nzType="bell" nzTheme="outline"></i>
         </a>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
+        <nz-dropdown-menu #menu="nzDropdownMenu" >
           <ul
             nz-menu
             nzSelectable
             *ngIf="notification.length > 0; else nonotif"
+            class="menuH"
           >
             <li *ngFor="let item of notification; let i = index">
               <div

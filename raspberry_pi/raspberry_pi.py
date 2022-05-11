@@ -144,6 +144,7 @@ def SendRequest(fdtPlace):
 
 def SendNtifInfo():
     sio.emit('showAngularNotificationInfo')
+    # sio.emit('showAngularNotification')
     notificatonData = {
         "fdtName": fdtAddresse,
         "type": "info"

@@ -1,9 +1,32 @@
-<div class="parent">
-  <div class="container">{{ notification.value }}</div>
-  <div class="container">
-    {{ this.fixtimeform }}
-    <div class="divider"></div>
-  </div>
+<div style="background: #ececec; padding: 25px">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="12">
+      <nz-card>
+        <nz-statistic
+          nzValue="{{ this.fixtimeform }}"
+          [nzTitle]="'problem time'"
+          [nzPrefix]="prefixTplOne"
+          [nzValueStyle]="{ color: '#3F8600' }"
+        ></nz-statistic>
+        <ng-template #prefixTplOne
+          ><i nz-icon nzType="clock-circle" nzTheme="outline"></i
+        ></ng-template>
+      </nz-card>
+    </nz-col>
+    <nz-col [nzSpan]="12">
+      <nz-card>
+        <nz-statistic
+          nzValue="{{ notification.value }}"
+          [nzTitle]="'value'"
+          [nzPrefix]="prefixTplTwo"
+          [nzValueStyle]="{ color: '#CF1322' }"
+        ></nz-statistic>
+        <ng-template #prefixTplTwo
+          ><i nz-icon nzType="arrow-down"></i
+        ></ng-template>
+      </nz-card>
+    </nz-col>
+  </nz-row>
 </div>
 
 <iframe
@@ -15,11 +38,3 @@
   loading="lazy"
   referrerpolicy="no-referrer-when-downgrade"
 ></iframe>
-
-
-<table>
-  <tr>
-    <td>
-    </td>
-  </tr>
-</table> 
