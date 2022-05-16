@@ -36,9 +36,13 @@ Route::get('dailyValue/{id}', [DailyFdtValueController::class, 'show']);
 Route::get('dailyValue', [DailyFdtValueController::class, 'index']);
 Route::post('dailyValue', [DailyFdtValueController::class, 'store']);
 
+
 Route::post('fdtRequest', [FdtRequestController::class, 'store']);
 Route::get('fdtRequest', [FdtRequestController::class, 'index']);
 Route::put('fdtRequest/{id}', [FdtRequestController::class, 'update']);
+
+
+Route::get('getAverage/{id}', [DailyFdtValueController::class, 'getAverage']);
 
 
 

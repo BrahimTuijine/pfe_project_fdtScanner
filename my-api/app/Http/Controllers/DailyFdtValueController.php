@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\dailyFdtValue;
 use App\Http\Requests\UpdatedailyFdtValueRequest;
 use Illuminate\Http\Request;
@@ -68,4 +69,17 @@ class DailyFdtValueController extends Controller
     {
         //
     }
+
+    /**
+     * get average value of an fdt.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getAverage($id)
+    {
+        return DB::table('daily_fdt_values')->where("fdtId" , "=" , $id )->avg('value');
+    }
+
+    
 }
